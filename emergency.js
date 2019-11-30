@@ -16,9 +16,26 @@
 //   Body: "And this is the body"
 // }).then(message => alert(message));
 
-if (navigator.geolocation) {
-  console.log('Geolocation is supported!');
-}
-else {
-  console.log('Geolocation is not supported for this Browser/OS.');
-}
+var button = document.getElementById("button");
+
+button.onclick = function() {
+  var x = document.getElementById("demo");
+
+  getLocation();
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function showPosition(position) {
+    x.innerHTML =
+      "Latitude: " +
+      position.coords.latitude +
+      "<br>Longitude: " +
+      position.coords.longitude;
+  }
+};
