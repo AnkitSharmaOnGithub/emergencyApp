@@ -54,7 +54,7 @@ button.onclick = function() {
   }
 
   function fetchNumberAndMessage() {
-    var contactNumber = document.getElementById("contact-number").value;
+    var contactNumber = "+91" + document.getElementById("contact-number").value;
 
     var message = document.getElementById("message").value;
 
