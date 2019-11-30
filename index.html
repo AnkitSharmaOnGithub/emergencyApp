@@ -5,13 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Emergency App</title>
-  </head>
-  <body>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
     <script src="https://smtpjs.com/v3/smtp.js" defer="defer"></script>
     <script src="emergency.js" defer="defer"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <h3>Hi. I am Alarmy. Ready to Help you out.</h3>
+      <h4>Remember you are not alone. I am with you.</h4>
 
-    <button id="button">Click on enable GeoLocation</button>
+      <button id="button">Click on enable GeoLocation</button>
 
-    <p id="demo"></p>
+      <p id="demo"></p>
+
+      <br /><br />
+
+      <!-- https://www.google.com/maps/search/?api=1&query=28.6139,77.2090 -->
+
+      <input
+        type="text"
+        id="message"
+        placeholder="Please type in your message for emergency"
+      />
+
+      <br /><br />
+
+      <input
+        type="text"
+        id="contact-number"
+        placeholder="Number for emergency"
+      />
+
+      <br /><br />
+
+      <input
+        type="text"
+        id="coordinates"
+        placeholder="Coordinates"
+        style="visibility: hidden;"
+      />
+
+      <br /><br />
+
+      <a id="sendLink" style="visibility: hidden;">
+        <button id="sendMessage">Send Message</button>
+      </a>
+    </div>
   </body>
 </html>

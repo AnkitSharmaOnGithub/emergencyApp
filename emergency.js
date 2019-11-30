@@ -37,5 +37,36 @@ button.onclick = function() {
       position.coords.latitude +
       "<br>Longitude: " +
       position.coords.longitude;
+
+    setCoordinates(position.coords.latitude, position.coords.longitude);
+  }
+
+  function setCoordinates(latitude, longitude) {
+    var coordinates = document.getElementById("coordinates");
+
+    var coordinatesValue = latitude + "," + longitude;
+
+    coordinates.value = coordinatesValue;
+
+    fetchNumberAndMessage();
+  }
+
+  function fetchNumberAndMessage() {
+    var contactNumber = document.getElementById("contact-number").value;
+
+    var message = document.getElementById("message").value;
+
+    sendWhatsAppMessage(contactNumber, message);
+  }
+
+  function sendWhatsAppMessage(contactNumber, message) {
+    var link = document.getElementById("sendLink");
+    link.setAttribute(
+      "href",
+      `https://api.whatsapp.com/send?phone=${contactNumber}&text=${message}`
+    );
+
+    var whatsAppBTN = document.getElementById("sendMessage");
+    whatsAppBTN.click();
   }
 };
