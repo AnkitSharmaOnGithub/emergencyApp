@@ -18,6 +18,8 @@
 
 var button = document.getElementById("button");
 
+var coordinatesValue;
+
 button.onclick = function() {
   var x = document.getElementById("demo");
 
@@ -44,7 +46,7 @@ button.onclick = function() {
   function setCoordinates(latitude, longitude) {
     var coordinates = document.getElementById("coordinates");
 
-    var coordinatesValue = latitude + "," + longitude;
+    coordinatesValue = latitude + "," + longitude;
 
     coordinates.value = coordinatesValue;
 
@@ -61,9 +63,14 @@ button.onclick = function() {
 
   function sendWhatsAppMessage(contactNumber, message) {
     var link = document.getElementById("sendLink");
+
+    var googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${coordinatesValue}`;
+
+    console.log(googleMapsLink);
+
     link.setAttribute(
       "href",
-      `https://api.whatsapp.com/send?phone=${contactNumber}&text=${message}`
+      `https://api.whatsapp.com/send?phone=${contactNumber}&text='${message}. Click to see my location:- ${googleMapsLink}'`
     );
 
     var whatsAppBTN = document.getElementById("sendMessage");
