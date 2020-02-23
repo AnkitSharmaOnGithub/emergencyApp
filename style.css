@@ -6,3 +6,8 @@ body {
   width: 40%;
   margin: auto;
 }
+
+p.alert{
+  color: red;
+  display: none;
+}

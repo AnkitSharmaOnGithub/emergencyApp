@@ -16,64 +16,78 @@
 //   Body: "And this is the body"
 // }).then(message => alert(message));
 
-var button = document.getElementById("button");
+var enableGeoLocation = document.getElementById("enableGeoLocation");
+var message = document.getElementById('message');
+var contactNumber = document.getElementById('contact-number');
+var sendMessage = document.getElementById('sendMessage');
+
+var x = document.getElementById("demo");
 
 var coordinatesValue;
 
-button.onclick = function() {
-  var x = document.getElementById("demo");
 
-  getLocation();
+sendMessage.onclick = function () {
+  if (message.value !== '' && contactNumber.value !== '') {
+    // console.log(message, contactNumber);
+    document.querySelector('p.alert').style.display = 'none';
 
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    getLocation();
+    fetchNumberAndMessage(); 
   }
-
-  function showPosition(position) {
-    x.innerHTML =
-      "Latitude: " +
-      position.coords.latitude +
-      "<br>Longitude: " +
-      position.coords.longitude;
-
-    setCoordinates(position.coords.latitude, position.coords.longitude);
-  }
-
-  function setCoordinates(latitude, longitude) {
-    var coordinates = document.getElementById("coordinates");
-
-    coordinatesValue = latitude + "," + longitude;
-
-    coordinates.value = coordinatesValue;
-
-    fetchNumberAndMessage();
-  }
-
-  function fetchNumberAndMessage() {
-    var contactNumber = "+91" + document.getElementById("contact-number").value;
-
-    var message = document.getElementById("message").value;
-
-    sendWhatsAppMessage(contactNumber, message);
-  }
-
-  function sendWhatsAppMessage(contactNumber, message) {
-    var link = document.getElementById("sendLink");
-
-    var googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${coordinatesValue}`;
-
-    console.log(googleMapsLink);
-
-    link.setAttribute(
-      "href",
-      `https://api.whatsapp.com/send?phone=${contactNumber}&text='${message}. Click to see my location:- ${googleMapsLink}'`
-    );
-
-    var whatsAppBTN = document.getElementById("sendMessage");
-    whatsAppBTN.click();
+  else {
+    document.querySelector('p.alert').style.display = 'block';
   }
 };
+
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML =
+    "Latitude: " +
+    position.coords.latitude +
+    "<br>Longitude: " +
+    position.coords.longitude;
+
+  setCoordinates(position.coords.latitude, position.coords.longitude);
+}
+
+function setCoordinates(latitude, longitude) {
+  var coordinates = document.getElementById("coordinates");
+
+  coordinatesValue = latitude + "," + longitude;
+
+  coordinates.value = coordinatesValue;
+}
+
+function fetchNumberAndMessage() {
+  var contactNumber = "+91" + document.getElementById("contact-number").value;
+
+  var message = document.getElementById("message").value;
+
+  sendWhatsAppMessage(contactNumber, message);
+}
+
+function sendWhatsAppMessage(contactNumber, message) {
+  var link = document.getElementById("sendLink");
+
+  var googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${coordinatesValue}`;
+
+  console.log(googleMapsLink);
+
+  link.setAttribute(
+    "href",
+    `https://api.whatsapp.com/send?phone=${contactNumber}&text=${message}. Click to see my location:- ${googleMapsLink}`
+  );
+
+  console.log(link);
+
+  // var whatsAppBTN = document.getElementById("sendMessage");
+  // whatsAppBTN.click();
+}
